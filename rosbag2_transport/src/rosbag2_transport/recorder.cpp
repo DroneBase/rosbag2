@@ -757,4 +757,139 @@ Recorder::stop_discovery()
   pimpl_->stop_discovery_ = true;
 }
 
+///////////////////////////////
+// RecorderStandalone public interface
+
+RecorderStandalone::RecorderStandalone(
+  rclcpp::Node * owner,
+  const std::string & node_name,
+  const rclcpp::NodeOptions & node_options)
+{
+  // TODO(karsten1987): Use this constructor later with parameter parsing.
+  // The reader, storage_options as well as record_options can be loaded via parameter.
+  // That way, the recorder can be used as a simple component in a component manager.
+  throw rclcpp::exceptions::UnimplementedError();
+}
+
+RecorderStandalone::RecorderStandalone(
+  rclcpp::Node * owner,
+  std::shared_ptr<rosbag2_cpp::Writer> writer,
+  const rosbag2_storage::StorageOptions & storage_options,
+  const rosbag2_transport::RecordOptions & record_options,
+  const std::string & node_name,
+  const rclcpp::NodeOptions & node_options)
+: RecorderStandalone(
+    owner,
+    std::move(writer),
+#ifndef _WIN32
+    std::make_shared<KeyboardHandler>(false),
+#else
+    // We don't have signal handler option in constructor for windows version
+    std::shared_ptr<KeyboardHandler>(new KeyboardHandler()),
+#endif
+    storage_options,
+    record_options,
+    node_name,
+    node_options)
+{}
+
+RecorderStandalone::RecorderStandalone(
+  rclcpp::Node * owner,
+  std::shared_ptr<rosbag2_cpp::Writer> writer,
+  std::shared_ptr<KeyboardHandler> keyboard_handler,
+  const rosbag2_storage::StorageOptions & storage_options,
+  const rosbag2_transport::RecordOptions & record_options,
+  const std::string & node_name,
+  const rclcpp::NodeOptions & node_options)
+:
+  pimpl_(std::make_unique<RecorderImpl>(
+      owner, std::move(writer), keyboard_handler,
+      storage_options, record_options))
+{}
+
+RecorderStandalone::~RecorderStandalone()
+{}
+
+void RecorderStandalone::record()
+{
+  pimpl_->record();
+}
+
+void RecorderStandalone::stop()
+{
+  pimpl_->stop();
+}
+
+const std::unordered_set<std::string> &
+RecorderStandalone::topics_using_fallback_qos() const
+{
+  return pimpl_->topics_warned_about_incompatibility_;
+}
+
+const std::unordered_map<std::string, std::shared_ptr<rclcpp::SubscriptionBase>> &
+RecorderStandalone::subscriptions() const
+{
+  return pimpl_->subscriptions_;
+}
+
+const rosbag2_cpp::Writer &
+RecorderStandalone::get_writer_handle()
+{
+  return *pimpl_->writer_;
+}
+
+void
+RecorderStandalone::pause()
+{
+  pimpl_->pause();
+}
+
+void
+RecorderStandalone::resume()
+{
+  pimpl_->resume();
+}
+
+void
+RecorderStandalone::toggle_paused()
+{
+  pimpl_->toggle_paused();
+}
+
+bool
+RecorderStandalone::is_paused()
+{
+  return pimpl_->is_paused();
+}
+
+std::unordered_map<std::string, std::string>
+RecorderStandalone::get_requested_or_available_topics()
+{
+  return pimpl_->get_requested_or_available_topics();
+}
+
+rosbag2_cpp::Writer &
+RecorderStandalone::get_writer()
+{
+  return *pimpl_->writer_;
+}
+
+rosbag2_storage::StorageOptions &
+RecorderStandalone::get_storage_options()
+{
+  return pimpl_->storage_options_;
+}
+
+rosbag2_transport::RecordOptions &
+RecorderStandalone::get_record_options()
+{
+  return pimpl_->record_options_;
+}
+
+void
+RecorderStandalone::stop_discovery()
+{
+  pimpl_->stop_discovery_ = true;
+}
+
 }  // namespace rosbag2_transport

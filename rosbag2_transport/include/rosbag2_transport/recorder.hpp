@@ -141,6 +141,96 @@ private:
   std::unique_ptr<RecorderImpl> pimpl_;
 };
 
+class RecorderStandalone
+{
+public:
+  ROSBAG2_TRANSPORT_PUBLIC
+  explicit RecorderStandalone(
+    rclcpp::Node * node,
+    const std::string & node_name = "rosbag2_recorder",
+    const rclcpp::NodeOptions & node_options = rclcpp::NodeOptions());
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  RecorderStandalone(
+    rclcpp::Node * node,
+    std::shared_ptr<rosbag2_cpp::Writer> writer,
+    const rosbag2_storage::StorageOptions & storage_options,
+    const rosbag2_transport::RecordOptions & record_options,
+    const std::string & node_name = "rosbag2_recorder",
+    const rclcpp::NodeOptions & node_options = rclcpp::NodeOptions());
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  RecorderStandalone(
+    rclcpp::Node * node,
+    std::shared_ptr<rosbag2_cpp::Writer> writer,
+    std::shared_ptr<KeyboardHandler> keyboard_handler,
+    const rosbag2_storage::StorageOptions & storage_options,
+    const rosbag2_transport::RecordOptions & record_options,
+    const std::string & node_name = "rosbag2_recorder",
+    const rclcpp::NodeOptions & node_options = rclcpp::NodeOptions());
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  virtual ~RecorderStandalone();
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  void record();
+
+  /// @brief Stopping recording.
+  /// @details The stop() is opposite to the record() operation. It will stop recording, dump
+  /// all buffers to the disk and close writer. The record() can be called again after stop().
+  ROSBAG2_TRANSPORT_PUBLIC
+  void stop();
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  const std::unordered_set<std::string> &
+  topics_using_fallback_qos() const;
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  const std::unordered_map<std::string, std::shared_ptr<rclcpp::SubscriptionBase>> &
+  subscriptions() const;
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  const rosbag2_cpp::Writer & get_writer_handle();
+
+  /// @brief Pause the recording.
+  /// @details Will keep writer open and skip messages upon arrival on subscriptions.
+  ROSBAG2_TRANSPORT_PUBLIC
+  void pause();
+
+  /// Resume recording.
+  ROSBAG2_TRANSPORT_PUBLIC
+  void resume();
+
+  /// Pause if it was recording, continue recording if paused.
+  ROSBAG2_TRANSPORT_PUBLIC
+  void toggle_paused();
+
+  /// Return the current paused state.
+  ROSBAG2_TRANSPORT_PUBLIC
+  bool is_paused();
+
+  inline constexpr static const auto kPauseResumeToggleKey = KeyboardHandler::KeyCode::SPACE;
+
+protected:
+  ROSBAG2_TRANSPORT_PUBLIC
+  std::unordered_map<std::string, std::string> get_requested_or_available_topics();
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  rosbag2_cpp::Writer & get_writer();
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  rosbag2_storage::StorageOptions & get_storage_options();
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  rosbag2_transport::RecordOptions & get_record_options();
+
+  ROSBAG2_TRANSPORT_PUBLIC
+  void stop_discovery();
+
+private:
+  std::unique_ptr<RecorderImpl> pimpl_;
+};
+
 ROSBAG2_TRANSPORT_PUBLIC std::string type_hash_to_string(const rosidl_type_hash_t & type_hash);
 // Retrieve the type description hash from endpoint info.
 ROSBAG2_TRANSPORT_PUBLIC std::string type_description_hash_for_topic(
