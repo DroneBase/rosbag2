@@ -145,19 +145,11 @@ class RecorderStandalone
 {
 public:
   ROSBAG2_TRANSPORT_PUBLIC
-  explicit RecorderStandalone(
-    rclcpp::Node * node,
-    const std::string & node_name = "rosbag2_recorder",
-    const rclcpp::NodeOptions & node_options = rclcpp::NodeOptions());
-
-  ROSBAG2_TRANSPORT_PUBLIC
   RecorderStandalone(
     rclcpp::Node * node,
     std::shared_ptr<rosbag2_cpp::Writer> writer,
     const rosbag2_storage::StorageOptions & storage_options,
-    const rosbag2_transport::RecordOptions & record_options,
-    const std::string & node_name = "rosbag2_recorder",
-    const rclcpp::NodeOptions & node_options = rclcpp::NodeOptions());
+    const rosbag2_transport::RecordOptions & record_options);
 
   ROSBAG2_TRANSPORT_PUBLIC
   RecorderStandalone(
@@ -165,9 +157,7 @@ public:
     std::shared_ptr<rosbag2_cpp::Writer> writer,
     std::shared_ptr<KeyboardHandler> keyboard_handler,
     const rosbag2_storage::StorageOptions & storage_options,
-    const rosbag2_transport::RecordOptions & record_options,
-    const std::string & node_name = "rosbag2_recorder",
-    const rclcpp::NodeOptions & node_options = rclcpp::NodeOptions());
+    const rosbag2_transport::RecordOptions & record_options);
 
   ROSBAG2_TRANSPORT_PUBLIC
   virtual ~RecorderStandalone();

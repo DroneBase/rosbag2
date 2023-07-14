@@ -762,22 +762,9 @@ Recorder::stop_discovery()
 
 RecorderStandalone::RecorderStandalone(
   rclcpp::Node * owner,
-  const std::string & node_name,
-  const rclcpp::NodeOptions & node_options)
-{
-  // TODO(karsten1987): Use this constructor later with parameter parsing.
-  // The reader, storage_options as well as record_options can be loaded via parameter.
-  // That way, the recorder can be used as a simple component in a component manager.
-  throw rclcpp::exceptions::UnimplementedError();
-}
-
-RecorderStandalone::RecorderStandalone(
-  rclcpp::Node * owner,
   std::shared_ptr<rosbag2_cpp::Writer> writer,
   const rosbag2_storage::StorageOptions & storage_options,
-  const rosbag2_transport::RecordOptions & record_options,
-  const std::string & node_name,
-  const rclcpp::NodeOptions & node_options)
+  const rosbag2_transport::RecordOptions & record_options)
 : RecorderStandalone(
     owner,
     std::move(writer),
@@ -788,9 +775,7 @@ RecorderStandalone::RecorderStandalone(
     std::shared_ptr<KeyboardHandler>(new KeyboardHandler()),
 #endif
     storage_options,
-    record_options,
-    node_name,
-    node_options)
+    record_options)
 {}
 
 RecorderStandalone::RecorderStandalone(
@@ -798,9 +783,7 @@ RecorderStandalone::RecorderStandalone(
   std::shared_ptr<rosbag2_cpp::Writer> writer,
   std::shared_ptr<KeyboardHandler> keyboard_handler,
   const rosbag2_storage::StorageOptions & storage_options,
-  const rosbag2_transport::RecordOptions & record_options,
-  const std::string & node_name,
-  const rclcpp::NodeOptions & node_options)
+  const rosbag2_transport::RecordOptions & record_options)
 :
   pimpl_(std::make_unique<RecorderImpl>(
       owner, std::move(writer), keyboard_handler,
