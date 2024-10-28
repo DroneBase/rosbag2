@@ -2,6 +2,32 @@
 Changelog for package rosbag2_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.22.7 (2024-07-11)
+-------------------
+* Gracefully handle SIGINT and SIGTERM signals for play and burst CLI (`#1690 <https://github.com/ros2/rosbag2/issues/1690>`_)
+* Fix for false negative tests in rosbag2_py (`#1688 <https://github.com/ros2/rosbag2/issues/1688>`_)
+* Add --log-level to ros2 bag play and record (`#1654 <https://github.com/ros2/rosbag2/issues/1654>`_)
+* Contributors: Michael Orlov, Roman
+
+0.22.6 (2024-02-07)
+-------------------
+* Install signal handlers in recorder only inside record method (`#1525 <https://github.com/ros2/rosbag2/issues/1525>`_)
+* Contributors: Michael Orlov
+
+0.22.5 (2023-11-18)
+-------------------
+
+0.22.4 (2023-10-24)
+-------------------
+
+0.22.3 (2023-09-08)
+-------------------
+
+0.22.2 (2023-07-14)
+-------------------
+* Gracefully handle SIGINT and SIGTERM in rosbag2 recorder (`#1394 <https://github.com/ros2/rosbag2/issues/1394>`_)
+* Contributors: Michael Orlov
+
 0.22.1 (2023-05-18)
 -------------------
 * Add binding to close the writer (`#1339 <https://github.com/ros2/rosbag2/issues/1339>`_) (`#1340 <https://github.com/ros2/rosbag2/issues/1340>`_)

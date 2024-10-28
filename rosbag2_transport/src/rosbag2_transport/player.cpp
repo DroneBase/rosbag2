@@ -384,7 +384,8 @@ bool Player::play_next()
     return false;
   }
 
-  RCLCPP_INFO_STREAM(get_logger(), "Playing next message.");
+  // Use RCLCPP_DEBUG_STREAM to avoid delays in the burst mode
+  RCLCPP_DEBUG_STREAM(get_logger(), "Playing next message.");
 
   // Temporary take over playback from play_messages_from_queue()
   std::lock_guard<std::mutex> main_play_loop_lk(skip_message_in_main_play_loop_mutex_);
@@ -434,6 +435,7 @@ size_t Player::burst(const size_t num_messages)
     }
   }
 
+  RCLCPP_INFO_STREAM(get_logger(), "Burst " << messages_played << " messages.");
   return messages_played;
 }
 
@@ -783,12 +785,12 @@ void Player::add_keyboard_callbacks()
   );
   add_key_callback(
     play_options_.increase_rate_key,
-    [this]() {set_rate(get_rate() * 1.1);},
+    [this]() {set_rate(get_rate() + 0.1);},
     "Increase Rate 10%"
   );
   add_key_callback(
     play_options_.decrease_rate_key,
-    [this]() {set_rate(get_rate() * 0.9);},
+    [this]() {set_rate(get_rate() - 0.1);},
     "Decrease Rate 10%"
   );
 }

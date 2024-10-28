@@ -2,6 +2,28 @@
 Changelog for package rosbag2_storage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.22.7 (2024-07-11)
+-------------------
+
+0.22.6 (2024-02-07)
+-------------------
+* Remove rcpputils::fs dependencies from rosbag2_storages (`#1564 <https://github.com/ros2/rosbag2/issues/1564>`_)
+* Contributors: Chris Lalancette, Kenta Yonekura, Michael Orlov, Roman
+
+0.22.5 (2023-11-18)
+-------------------
+
+0.22.4 (2023-10-24)
+-------------------
+
+0.22.3 (2023-09-08)
+-------------------
+
+0.22.2 (2023-07-14)
+-------------------
+* Fix missing cstdint include (`#1385 <https://github.com/ros2/rosbag2/issues/1385>`_)
+* Contributors: Zac Stanton
+
 0.22.1 (2023-05-18)
 -------------------
 

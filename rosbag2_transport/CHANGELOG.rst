@@ -2,6 +2,40 @@
 Changelog for package rosbag2_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.22.7 (2024-07-11)
+-------------------
+* Gracefully handle SIGINT and SIGTERM signals for play and burst CLI (`#1690 <https://github.com/ros2/rosbag2/issues/1690>`_)
+* Contributors: Michael Orlov
+
+0.22.6 (2024-02-07)
+-------------------
+* Workaround for flaky test_play_services running with fastrtps (`#1562 <https://github.com/ros2/rosbag2/issues/1562>`_)
+* Add proper message for --start-paused (`#1540 <https://github.com/ros2/rosbag2/issues/1540>`_)
+* `Recording stopped` prints only once. (`#1534 <https://github.com/ros2/rosbag2/issues/1534>`_)
+* Bugfix for incorrect playback rate changes when pressing buttons (`#1514 <https://github.com/ros2/rosbag2/issues/1514>`_)
+* Contributors: Christoph Fröhlich, Michael Orlov, Tomoya Fujita
+
+0.22.5 (2023-11-18)
+-------------------
+
+0.22.4 (2023-10-24)
+-------------------
+* Fix uninitialized value pointed out by clang static analysis. (backport `#1440 <https://github.com/ros2/rosbag2/issues/1440>`_) (`#1448 <https://github.com/ros2/rosbag2/issues/1448>`_)
+* Don't warn for unknown types if topics are not selected (`#1466 <https://github.com/ros2/rosbag2/issues/1466>`_) (`#1468 <https://github.com/ros2/rosbag2/issues/1468>`_)
+* Contributors: Michael Orlov, Chris Lalancette
+
+0.22.3 (2023-09-08)
+-------------------
+* Fix the build with rmw_fastrtps_dynamic. (`#1438 <https://github.com/ros2/rosbag2/issues/1438>`_)
+* Contributors: Chris Lalancette
+
+0.22.2 (2023-07-14)
+-------------------
+* Fix for rosbag2_transport::Recorder failures due to the unhandled exceptions (`#1402 <https://github.com/ros2/rosbag2/issues/1402>`_)
+* Fix for possible freeze in Recorder::stop() (`#1387 <https://github.com/ros2/rosbag2/issues/1387>`_)
+* Wait for /clock before beginning recording when using sim time (`#1391 <https://github.com/ros2/rosbag2/issues/1391>`_)
+* Contributors: Michael Orlov, Patrick Roncagliolo
+
 0.22.1 (2023-05-18)
 -------------------
 * Change subscriptions from GenericSubscripton to SubscriptionBase (`#1338 <https://github.com/ros2/rosbag2/issues/1338>`_)

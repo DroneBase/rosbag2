@@ -1,6 +1,29 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package rosbag2_storage_default_plugins
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package rosbag2_storage_sqlite3
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+0.22.7 (2024-07-11)
+-------------------
+
+0.22.6 (2024-02-07)
+-------------------
+* Use rw_lock to protect mcap metadata lists. (`#1566 <https://github.com/ros2/rosbag2/issues/1566>`_)
+* Remove rcpputils::fs dependencies from rosbag2_storages (`#1564 <https://github.com/ros2/rosbag2/issues/1564>`_)
+* Contributors: Chris Lalancette, Kenta Yonekura, Michael Orlov, Roman, Tomoya Fujita
+
+0.22.5 (2023-11-18)
+-------------------
+
+0.22.4 (2023-10-24)
+-------------------
+
+0.22.3 (2023-09-08)
+-------------------
+
+0.22.2 (2023-07-14)
+-------------------
+* Store metadata in db3 file (`#1319 <https://github.com/ros2/rosbag2/issues/1319>`_)
+* Contributors: Michael Orlov
 
 0.22.1 (2023-05-18)
 -------------------

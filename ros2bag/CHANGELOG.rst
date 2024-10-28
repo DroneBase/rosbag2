@@ -2,6 +2,31 @@
 Changelog for package ros2bag
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.22.7 (2024-07-11)
+-------------------
+* Allow to specify start offset from CLI arguments equal to 0.0 for the rosbag2 player (`#1714 <https://github.com/ros2/rosbag2/issues/1714>`_)
+* Add --log-level to ros2 bag play and record (`#1654 <https://github.com/ros2/rosbag2/issues/1654>`_)
+* Resolve recording option problem (`#1649 <https://github.com/ros2/rosbag2/issues/1649>`_)
+* Contributors: Barry Xu, Michael Orlov, Rein Appeldoorn, Roman
+
+0.22.6 (2024-02-07)
+-------------------
+
+0.22.5 (2023-11-18)
+-------------------
+
+0.22.4 (2023-10-24)
+-------------------
+
+0.22.3 (2023-09-08)
+-------------------
+
+0.22.2 (2023-07-14)
+-------------------
+* Wait for /clock before beginning recording when using sim time (`#1391 <https://github.com/ros2/rosbag2/issues/1391>`_)
+* Fix wrong descritpion for '--ignore-leaf-topics' (`#1345 <https://github.com/ros2/rosbag2/issues/1345>`_)
+* Contributors: Barry Xu
+
 0.22.1 (2023-05-18)
 -------------------
 * Cleanup the help text for ros2 bag record. (`#1329 <https://github.com/ros2/rosbag2/issues/1329>`_) (`#1333 <https://github.com/ros2/rosbag2/issues/1333>`_)
